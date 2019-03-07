@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>智慧停車場</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+</body>
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+  crossorigin=""></script>
+<script src="https://unpkg.com/jquery"></script>
+<script>
+var centerPoint = [25.0173405,121.5397518];
+var map;
+map = L.map('map').setView(centerPoint, 16);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> | <a href="https://noob.tw/openstreetmap/">Tutorial 教學</a>',
+  maxZoom: 18,
+}).addTo(map);
+
+var marker = L.marker(centerPoint);
+marker.addTo(map);
+for(var i=0;i<10;i++){
+  let point = L.marker([
+    centerPoint[0]+(Math.random()*0.01)-0.005,
+    centerPoint[1]+(Math.random()*0.01)-0.005
+  ]);
+  console.log(point);
+  // point.addTo(map);
+}
+//https://dashboard1999.kcg.gov.tw/data/kaohsiung.json
+// $.getJSON('/simple/kaohsiung.json', function(r){
+//   console.log(r);
+//   L.geoJSON(r, {color: '#333', weight: 0.7}).addTo(map);
+// })
+</script>
+</html>
