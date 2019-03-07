@@ -1,6 +1,7 @@
 const request = require('request');
 const random = require('../../modules/random');
 
+var server = "https://makentu2019-test.herokuapp.com"||"http://localhost:3000";
 var device;
 var space = [{"pid":0,"status":false,"detail":{"layer":"B1","price":0}},{"pid":1,"status":false,"detail":{"layer":"B1","price":0}},{"pid":2,"status":true,"detail":{"layer":"1","price":0}}];
 function registered(){
@@ -11,7 +12,7 @@ function registered(){
     name:"virtualDevice",
   };
   let option = {
-    url:`http://localhost:3000/api/registered?uuid=${encodeURI(random(8))}&lat=${value.lat}&lon=${value.lon}&name=${value.name}`
+    url:`${server}/api/registered?uuid=${encodeURI(random(8))}&lat=${value.lat}&lon=${value.lon}&name=${value.name}`
   };
   request(option, (e,r,d)=>{
     device = JSON.parse(d);
@@ -23,7 +24,7 @@ function registered(){
 
 function update(){
   let options = {
-    url:"http://localhost:3000/api/update",
+    url:server+"/api/update",
     form:{
       token:device.token,
       status:"true",
@@ -39,7 +40,7 @@ function update(){
 
 function status(){
   let option = {
-    url:"http://localhost:3000/api/status?lat=25.0131203&lon=121.5368873"
+    url:server+"/api/status?lat=25.0131203&lon=121.5368873"
   }
   request(option, (e,r,d)=>{
     let data = JSON.parse(d);
@@ -51,7 +52,7 @@ function status(){
 }
 
 function remove(){
-  request('http://localhost:3000/api/remove?index='+device.id, (e,r,d)=>{
+  request(server+'/api/remove?index='+device.id, (e,r,d)=>{
     console.log(d);
   });
 }
