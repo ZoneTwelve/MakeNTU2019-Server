@@ -1,7 +1,7 @@
 const request = require('request');
 const random = require('../../modules/random');
 
-var server = ["https://makentu2019-test.herokuapp.com", "http://localhost:3000"][parseInt(process.argv[2])||0];
+var server = ["http://localhost:3000", "https://makentu2019-test.herokuapp.com"][parseInt(process.argv[2])||0];
 var device;
 var space = [{"pid":0,"status":false,"detail":{"layer":"B1","price":0}},{"pid":1,"status":false,"detail":{"layer":"B1","price":0}},{"pid":2,"status":true,"detail":{"layer":"1","price":0}}];
 function registered(){
