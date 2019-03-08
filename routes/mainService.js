@@ -57,6 +57,7 @@ router.get('/registered', (req, res)=>{//停車場系統裝置註冊
 router.post('/update', (req, res) => {  //更新停車場位置
   let {token} = req.body; // 裝置 access token
   let device = accessDevice.find(d=>d.token===token)||null; // 利用 access token 找到隸屬單位的裝置
+  let io = req.app.get('socketio');
   if(device!==null){
     //偷懶直接把 space encode
     let data = {
@@ -65,7 +66,16 @@ router.post('/update', (req, res) => {  //更新停車場位置
       space:JSON.parse(req.body.space),
     };
     memory[parseInt(device.id)] = data;
+    // socket.emit('status', JSON.stringify(data));
+    io.emit('status', {
+      id:device.id,
+      // position:device.position,
+      time:Number(new Date()),
+      status:data.status,
+      space:data.space,
+    });
     res.status(200).send('');
+    // console.log(req.app.get('socketio'));
     //socket update data to client
   }else{
     return res.status(401).send({error:"401 Unauthorized, no access to update status"});
