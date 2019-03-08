@@ -3,6 +3,7 @@ const random = require('../../modules/random');
 
 var server = ["http://localhost:3000", "https://makentu2019-test.herokuapp.com"][parseInt(process.argv[2])||0];
 var device;
+var spaceStatus = true;
 var space = [
   {
     "pid":0,
@@ -46,16 +47,15 @@ function registered(){
 
 
 function update(){
-  let options = {
+  let option = {
     url:server+"/api/update",
     form:{
       token:device.token,
-      status:"true",
+      status:spaceStatus,
       space:JSON.stringify(space)
     }
   }
-
-  request.post(options, (e,r,d)=>{
+  request.post(option, (e,r,d)=>{
     console.log("update status", r.statusCode, new Date(), d);
     status();
   });
@@ -75,6 +75,14 @@ function status(){
       space[0]['status'] = (Math.random()>0.5);
       space[1]['status'] = !space[0]['status'];
       space[2]['status'] = ((Number(new Date())%10000)>5000)
+      
+      spaceStatus = false;
+      for(var i=0;i<space.length;i++){
+        if(space[i]['status']==true){
+          spaceStatus = true;
+          break;
+        }
+      }
       update();
     }, (Math.random()*4000+1000));
   });

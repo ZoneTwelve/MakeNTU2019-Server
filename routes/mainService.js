@@ -48,7 +48,7 @@ router.get('/registered', (req, res)=>{//停車場系統裝置註冊
   accessDevice.push(device);
   memory[device.id] = {
     id:device.id,
-    status:(req.query.status==true),
+    status:(req.query.status==false),
     space:[],
   };
   res.send(device);
@@ -62,17 +62,19 @@ router.post('/update', (req, res) => {  //更新停車場位置
     //偷懶直接把 space encode
     let data = {
       id:device.id,
-      status:(req.query.status==true),
+      status:(req.body.status=="true"),
       space:JSON.parse(req.body.space),
     };
     memory[parseInt(device.id)] = data;
     // socket.emit('status', JSON.stringify(data));
+    // console.log(data);
     io.emit('status', {
       id:device.id,
       position:device.position,
       time:Number(new Date()),
       status:data.status,
       space:data.space,
+      length:data.space.length,
     });
     res.status(200).send('');
     // console.log(req.app.get('socketio'));
