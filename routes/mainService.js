@@ -69,7 +69,7 @@ router.post('/update', (req, res) => {  //更新停車場位置
     // socket.emit('status', JSON.stringify(data));
     io.emit('status', {
       id:device.id,
-      // position:device.position,
+      position:device.position,
       time:Number(new Date()),
       status:data.status,
       space:data.space,
