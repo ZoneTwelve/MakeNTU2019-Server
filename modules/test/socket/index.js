@@ -8,6 +8,6 @@ socket.on('connect', function (socket) {
 });
 
 socket.on('status', (data)=>{
-  console.log('裝置資料更新', new Date(data.time));
+  console.log('模擬使用者接收資料', new Date(data.time));
   console.log(data)
 });

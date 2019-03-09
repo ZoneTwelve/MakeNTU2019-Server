@@ -35,6 +35,12 @@ function registered(){
     lon:121.5368873+(Math.random()*0.01-0.005),
     name:"virtualDevice",
   };
+  let query = {
+    uuid:"uuidcode",
+    name:"device name(ESP8266||我們只是路過停車場)",
+    lat:24.9679966,
+    lon:121.1922029,
+  };
   let option = {
     url:`${server}/api/registered?uuid=${encodeURI(random(8))}&lat=${value.lat}&lon=${value.lon}&name=${value.name}`
   };

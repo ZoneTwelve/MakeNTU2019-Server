@@ -76,7 +76,7 @@ router.post('/update', (req, res) => {  //更新停車場位置
       space:data.space,
       length:data.space.length,
     });
-    res.status(200).send('');
+    res.status(200).send({message:"success"});
     // console.log(req.app.get('socketio'));
     //socket update data to client
   }else{
