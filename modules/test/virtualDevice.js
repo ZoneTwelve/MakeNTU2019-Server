@@ -8,24 +8,18 @@ var space = [
   {
     "pid":0,
     "status":false,
-    "detail":{
-      "layer":"B1",
-      "price":0
-    }
+    "floor":"B1",
+    "price":0
   },{
     "pid":1,
     "status":false,
-    "detail":{
-      "layer":"B1",
-      "price":0
-    }
+    "floor":"B1",
+    "price":0
   },{
     "pid":2,
     "status":true,
-    "detail":{
-      "layer":"1",
-      "price":0
-    }
+    "floor":"1",
+    "price":0
   }
 ];
 function registered(){
